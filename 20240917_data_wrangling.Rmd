@@ -1,18 +1,18 @@
 ---
 title: "20240917_data_wrangling"
-output: html_document
+output: github_document
 ---
 
-I'm an R Markdown document! 
 
 # Import Library
-```{r}
+```{r setup, echo =FALSE, meassage = FALSE}
 library(tidyverse)
 ```
 
+This document will show how to import data
 # Lading Dataset
 ```{r}
-litters_df = read_csv(file = "./data_import_examples/FAS_litters.csv")
+litters_df = read_csv(file = "./data/FAS_litters.csv")
 litters_df
 ```
 I can take the mean of the sample, too!
