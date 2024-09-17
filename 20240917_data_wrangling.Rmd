@@ -1,0 +1,19 @@
+---
+title: "20240917_data_wrangling"
+output: html_document
+---
+
+I'm an R Markdown document! 
+
+# Import Library
+```{r}
+library(tidyverse)
+```
+
+# Lading Dataset
+```{r}
+litters_df = read_csv(file = "./data_import_examples/FAS_litters.csv")
+litters_df
+```
+I can take the mean of the sample, too!
+The mean is `r mean(samp)`.
