@@ -7,6 +7,8 @@ output: github_document
 # Import Library
 ```{r setup, echo = FALSE, message = FALSE}
 library(tidyverse)
+library(readxl)
+library(haven)
 ```
 
 This document will show how to import data.
@@ -90,6 +92,36 @@ litter_df =
   )
 ```
 
+## Import excel file
 
+Import MLB 2011 Summary Data
+```{r}
+mlb_df = 
+  read_excel("data/mlb11.xlsx", sheet = 'mlb11')
+mlb_df
+```
+If it has multiple sheets, you can change the input for "sheet" respectively to the name you want to import.
+Range specifices rows and columns to be import. These parameters are unique to read_excel and not present in read_csv.
 
+## Import SAS data
+
+```{r}
+pulse_df = read_sas("data/public_pulse_data.sas7bdat")
+
+pulse_df
+```
+
+## Never use read.csv()
+
+```{r, eval = FALSE}
+litters_df = read.csv("data/FAS_litters.csv")
+
+litters_df
+```
+Faster Reading speed for underscore than ".". 
+
+Never do this either:
+```{r, eval = FALSE}
+litters_df$L
+```
 
