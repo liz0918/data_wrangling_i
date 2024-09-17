@@ -1,17 +1,95 @@
 ---
-title: "20240917_data_wrangling"
+title: "20240917_data_wrangling_I"
 output: github_document
 ---
 
 
 # Import Library
-```{r setup, echo =FALSE, meassage = FALSE}
+```{r setup, echo = FALSE, message = FALSE}
 library(tidyverse)
 ```
 
-This document will show how to import data
-# Lading Dataset
-```{r}
-litters_df = read_csv(file = "./data/FAS_litters.csv")
+This document will show how to import data.
+
+# Importing Dataset
+```{r, message = FALSE}
+litters_df = read_csv(file = "data/FAS_litters.csv")
+
+litters_df = janitor::clean_names(litters_df)
+```
+The janitor package, clean names function take the names of all columns and converts the characters to lowercase and spaces with underscore.
+
+## Look at the dataset
+```{r dataset closeup}
+litters_df
+
+head(litters_df)
+tail(litters_df, 10)
+```
+
+
+```{r, eval = FALSE}
+view(litters_df)
+#r eval = FALSE, view makes it hard when knitting markdown
+```
+
+## Learning Assessment
+Use Relative Path
+```{r pups df import, message = FALSE}
+pups_df = read_csv(file = "data/FAS_pups.csv")
+
+pups_df = janitor:: clean_names(pups_df)
+
+pups_df
+```
+Use Absolute Path
+```{r, eval = FALSE}
+
+pups_df = read_csv("/Users/lizy_choi/Desktop/Columbia/P8105/lecture_codes/data_wrangling_I/data/FAS_pups.csv")
+
+pups_df = janitor::clean_names(pups_df)
+
+pups_df
+```
+## Look at read_csv options
+
+```{r, message = FALSE, eval = FALSE}
+litters_df = 
+  read_csv(
+    file = 'data/FAS_litters.csv',
+    col_names = FALSE,
+    skip = 1 
+  )
+
 litters_df
 ```
+The code above skipped first row and the column names have been changed to X (not the original column names). This is useful when first couple of rows does not contain actual data, but a brief description of the data. It commonly occurrs when working with collaborators. 
+
+
+## What about Missing Data
+```{r, message = FALSE, eval = FALSE}
+litters_df = 
+  read_csv(
+    file = 'data/FAS_litters.csv',
+    na = c("NA", "", ".")
+  )
+litters_df
+```
+Changing the values in "GD0 weight", "GD18 weight" to double. The reasonw why they weren't dbls to begin with is due to NA values. You can remove these NA values by telling R, which were NA values in the data. Now, R can interpret the values in the variable as numeric instead of characters.
+
+What if we code `group` as a factor variable?
+
+```{r}
+litter_df =
+  read_csv(
+    file = "data/FAS_litters.csv",
+    na = c("NA", "", "."),
+    col_types = cols(
+      Group = col_factor()
+    )
+  )
+```
+
+
+
+
