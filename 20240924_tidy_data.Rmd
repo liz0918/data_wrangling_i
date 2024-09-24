@@ -47,6 +47,7 @@ litters_df =
 case_match function is useful when there are multiple levels in a column in a string format that you want to change into a numerical variable.
 
 ## Pivot wider
+Useful when post processing analysis of results
 
 ```{r}
 analysis_df = 
@@ -57,11 +58,13 @@ analysis_df =
   )
 ```
 
+Markdown table formatting using knitr package, kable function
 ```{r}
 analysis_df %>% 
   pivot_wider(
     names_from = time,
     values_from = mean
-  )
+  ) %>% 
+  knitr::kable()
 ```
 
